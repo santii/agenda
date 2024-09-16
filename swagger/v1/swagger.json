@@ -1,0 +1,129 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/contatos": {
+      "post": {
+        "summary": "Criar um contato",
+        "parameters": [
+
+        ],
+        "responses": {
+          "201": {
+            "description": "contato criado com sucesso"
+          },
+          "422": {
+            "description": "requisição inválida"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "telefone": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "nome",
+                  "telefone"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar contatos",
+        "responses": {
+          "200": {
+            "description": "Contatos listados com sucesso"
+          }
+        }
+      }
+    },
+    "/contatos/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Detalhar um contato",
+        "responses": {
+          "200": {
+            "description": "Contato encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "nome",
+                    "email",
+                    "created_at",
+                    "updated_at"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contato não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Apagar um contato",
+        "responses": {
+          "204": {
+            "description": "Contato apagado com sucesso"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "www.example.com"
+        }
+      }
+    }
+  ]
+}
